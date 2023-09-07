@@ -1,28 +1,16 @@
 ﻿/*
-* Сессия теперь создается в общей области видимости.
-* Будет "захватываться" тремя функциями
-* 
-* */ 
-let session = {} ;
-
-/*
 * Сохранение данных сессии сразу при заходе пользователя на страницу
-* 
 * */
-function handleSession(){
-    // Сохраним время начала сессии
-    session["startDate"] = new Date().toLocaleString();
-    // Сохраним UserAgent
-    session["userAgent"] = window.navigator.userAgent;
-}
+let session = {
+    'startDate': new Date().toLocaleString(),
+    'userAgent': window.navigator.userAgent,
+    'userAge': +prompt("Пожалуйста, введите ваш возраст?"),
+};
 
 /*
 * Проверка возраста пользователя
-* 
-* */
+*/
 function checkAge(){
-    session["age"] = +prompt("Пожалуйста, введите ваш возраст?");
-    
     if(session.age >= 18){
         alert("Приветствуем на LifeSpot! " + '\n' +  "Текущее время: " + new Date().toLocaleString() );
     }
@@ -38,9 +26,9 @@ function checkAge(){
 * 
 * */
 let sessionLog = function () {
-    for (const key in session){
-        console.log(`${key}: ${session[key]}`);
-    }
+    console.log('Начало сессии: ' + session.startDate)
+    console.log('Даныне клиента: ' + session.userAgent)
+    console.log('Возраст пользователя: : ' + session.userAge)
 }
 
 /*
