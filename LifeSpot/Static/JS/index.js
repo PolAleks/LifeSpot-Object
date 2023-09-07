@@ -1,24 +1,34 @@
-﻿/*
-* Сохранение данных сессии сразу при заходе пользователя на страницу
-* */
-let session = {
-    'startDate': new Date().toLocaleString(),
-    'userAgent': window.navigator.userAgent,
-    'userAge': +prompt("Пожалуйста, введите ваш возраст?"),
-};
-
-/*
-* Проверка возраста пользователя
-*/
-function checkAge(){
-    if(session.age >= 18){
-        alert("Приветствуем на LifeSpot! " + '\n' +  "Текущее время: " + new Date().toLocaleString() );
+﻿
+function sessionHandler(logger, cheker) {
+    if (!window.sessionStorage.getItem("startDate")) {
+        window.sessionStorage.setItem("startDate", new Date().toLocaleString());
     }
-    else{
-        alert("Наши трансляции не предназначены для лиц моложе 18 лет. ВыL будете перенаправлены");
+
+    if (!window.sessionStorage.getItem("userAgent")) {
+        window.sessionStorage.setItem("userAgent", window.navigator.userAgent);
+    }
+
+    if (!window.sessionStorage.getItem("userAge")) {
+        window.sessionStorage.setItem("userAge", +prompt("Пожалуйста, введите ваш возраст?"));
+
+        cheker(true);
+    } else {
+        cheker(false);
+    }
+
+    logger();
+}
+
+function checkAge(flag) {
+    if (window.sessionStorage.getItem("userAge") >= 18) {
+        if (flag) alert("Приветствуем на LifeSpot! " + '\n' + "Текущее время: " + new Date().toLocaleString());
+    }
+    else {
+        alert("Наши трансляции не предназначены для лиц моложе 18 лет. Вы будете перенаправлены");
         window.location.href = "http://www.google.com"
     }
 }
+
 
 
 /*
@@ -26,9 +36,9 @@ function checkAge(){
 * 
 * */
 let sessionLog = function () {
-    console.log('Начало сессии: ' + session.startDate)
-    console.log('Даныне клиента: ' + session.userAgent)
-    console.log('Возраст пользователя: : ' + session.userAge)
+    console.log(`Начало сессии: ${window.sessionStorage.getItem("startDate")}`);
+    console.log(`Данные клиента: ${window.sessionStorage.getItem("userAgent")}`);
+    console.log(`Возраст пользователя: ${window.sessionStorage.getItem("userAge")}`);
 }
 
 /*
@@ -37,13 +47,13 @@ let sessionLog = function () {
 * 
 * */
 
-function filterContent(){
+function filterContent() {
     let elements = document.getElementsByClassName('video-container');
 
-    for (let i = 0; i <= elements.length; i++ ){
+    for (let i = 0; i <= elements.length; i++) {
         let videoText = elements[i].getElementsByTagName('h3')[0].innerText;
 
-        if(!videoText.toLowerCase().includes(inputParseFunction().toLowerCase())){
+        if (!videoText.toLowerCase().includes(inputParseFunction().toLowerCase())) {
             elements[i].style.display = 'none';
         } else {
             elements[i].style.display = 'inline-block';
@@ -53,7 +63,7 @@ function filterContent(){
 
 /*
 * Всплывающее окно будет показано по таймауту
-* 
+*
 * */
 // setTimeout(() =>
 //     alert("Нравится LifeSpot? " + '\n' +  "Подпишитесь на наш Instagram @lifespot999!" ),
