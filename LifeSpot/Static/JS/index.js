@@ -8,8 +8,8 @@ function sessionHandler(logger, cheker) {
         window.sessionStorage.setItem("userAgent", window.navigator.userAgent);
     }
 
-    if (!window.sessionStorage.getItem("userAge")) {
-        window.sessionStorage.setItem("userAge", +prompt("Пожалуйста, введите ваш возраст?"));
+    if (window.sessionStorage.userAge == undefined) {
+        window.sessionStorage.userAge = +prompt("Пожалуйста, введите ваш возраст?");
 
         cheker(true);
     } else {
@@ -20,7 +20,7 @@ function sessionHandler(logger, cheker) {
 }
 
 function checkAge(flag) {
-    if (window.sessionStorage.getItem("userAge") >= 18) {
+    if (window.sessionStorage.userAge >= 18) {
         if (flag) alert("Приветствуем на LifeSpot! " + '\n' + "Текущее время: " + new Date().toLocaleString());
     }
     else {
