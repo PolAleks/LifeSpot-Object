@@ -21,9 +21,15 @@ function getReview() {
     
     // Сохраним текущее время
     review["date"] = new Date().toLocaleString()
-    
-    // Добавим на страницу
-    writeReview(review)
+
+    if (confirm("Хотите, что-бы ваш отзыв могли оценить другие пользователи?")) {
+        let feedback = Object.create(review);
+        feedback.rate = 0;
+        writeReview(feedback);
+    } else {
+        writeReview(review);
+    }
+
 }
 
 /*
@@ -31,8 +37,12 @@ function getReview() {
 * 
 * */
 const writeReview = review => {
+    let rating = "";
+    if (review.hasOwnProperty("rate")) {
+        rating = `<p>Рейтинг отзыва: ${review.rate}</p>`;
+    }
     document.getElementsByClassName('reviews')[0].innerHTML += '    <div class="review-text">\n' +
-        `<p> <i> <b>${review['userName']}</b>  ${review['date']}</i></p>` +
-        `<p>${review['comment']}</p>`  +
+        `<p> <i> <b>${review.userName}</b>  ${review.date}</i></p>` +
+        `<p>${review.comment}</p>`  + rating
         '</div>';
 }
