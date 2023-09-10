@@ -1,41 +1,57 @@
-﻿/*
-* Запросим пользовательский ввод
-* и сохраним отзыв в объект
-* 
-* */
-function getReview() {
-    // Создадим объект
-    let review = {}
-    
-    // Сохраним свойство имени
-    review["userName"] = prompt("Как вас зовут ?")
-    if(review["userName"] == null){
-        return
+﻿//function getReview() {
+//    // Сохраним свойство имени
+//    this.userName = prompt("Как вас зовут ?")
+//    if(this.userName == null){
+//        return
+//    }
+//    // Сохраним текст отзыва
+//    this.comment = prompt("Напишите свой отзыв")
+//    if(this.comment == null){
+//        return
+//    }
+//    // Сохраним текущее время
+//    this.date = new Date().toLocaleString()
+
+//    if (confirm("Хотите, что-бы ваш отзыв могли оценить другие пользователи?")) {
+//        let feedback = Object.create(this);
+//        feedback.rate = 0;
+//        writeReview(feedback);
+//    } else {
+//        writeReview(this);
+//    }
+//}
+
+// Функция конструктор объекта Comment
+function Comment() {
+    this.userName = prompt("Как вас зовут?");
+    if (this.userName == null) {
+        this.empty = true;
+        return;
     }
-    
-    // Сохраним текст отзыва
-    review["comment"] = prompt("Напишите свой отзыв")
-    if(review["comment"] == null){
-        return
+    this.comment = prompt("Напишите свой отзыв")
+    if (this.comment == null) {
+        this.empty = true;
+        return;
     }
-    
-    // Сохраним текущее время
-    review["date"] = new Date().toLocaleString()
+    this.date = new Date().toLocaleString()
+}
+
+function addComment() {
+    let comment = new Comment();
+    if (comment.empty)
+        return;
 
     if (confirm("Хотите, что-бы ваш отзыв могли оценить другие пользователи?")) {
-        let feedback = Object.create(review);
+        let feedback = Object.create(comment);
         feedback.rate = 0;
         writeReview(feedback);
     } else {
-        writeReview(review);
+        writeReview(comment);
     }
-
 }
 
-/*
-* Запишем отзыв на страницу 
-* 
-* */
+// Добавление отзыва на страницу 
+
 const writeReview = review => {
     let rating = "";
     if (review.hasOwnProperty("rate")) {
