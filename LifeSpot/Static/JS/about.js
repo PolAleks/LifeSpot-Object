@@ -55,10 +55,19 @@ function addComment() {
 const writeReview = review => {
     let rating = "";
     if (review.hasOwnProperty("rate")) {
-        rating = `<p>Рейтинг отзыва: ${review.rate}</p>`;
+        let currentId = Math.floor(Math.random() * 1000);
+        rating = `<button id ="${currentId}" onclick=addLike(this.id)>❤️ 0</button>`;
     }
     document.getElementsByClassName('reviews')[0].innerHTML += '    <div class="review-text">\n' +
-        `<p> <i> <b>${review.userName}</b>  ${review.date}</i></p>` +
-        `<p>${review.comment}</p>`  + rating
+        `<p> <i> <b>${review.userName}</b>  ${review.date}</i> ${rating}</p>` +
+        `<p>${review.comment}</p>` +
         '</div>';
 }
+
+function addLike(id) {
+    let like = document.getElementById(id);
+    let rate = Number(like.innerText.slice(2));
+    like.innerText = `❤️ ${++rate}`;
+}
+
+
