@@ -1,4 +1,22 @@
-﻿// Создаем объект Map
+﻿// Слайдер с прокруткой
+let offset = 0;
+let images = document.querySelector(".images");
+const beginningLastImageImage = (images.childElementCount - 1) * 1000;
+
+let btn = document.querySelector(".buttons");
+btn.addEventListener("click", move);
+
+function move(e) {
+    let step = Number(e.target.dataset.offset);
+    offset += step;
+
+    if (offset < 0) offset = beginningLastImageImage;
+
+    if (offset > beginningLastImageImage) offset = 0;
+    images.style.left = -offset + "px";
+}
+
+// Создаем объект Map
 let myMap = new Map();
 myMap.set("Германия", "Берлин")
 myMap.set("Швеция", "Стокгольм")

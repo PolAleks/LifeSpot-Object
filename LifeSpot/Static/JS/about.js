@@ -1,4 +1,35 @@
-﻿//function getReview() {
+﻿
+document.addEventListener("DOMContentLoaded", function () {
+    let images = document.querySelectorAll(".item");
+    let buttons = document.querySelector("#buttons");
+    buttons.addEventListener("click", showNextImage);
+
+    function showNextImage(e) {
+        let step = Number(e.target.dataset.step);
+
+        let currentIndex = Number(e.target.parentElement.dataset.visibleImage);
+        let nextIndex = currentIndex + step;
+
+        if (nextIndex >= (images.length - 1) || nextIndex <= 0) {
+            e.target.classList.add("end");
+        } else {
+            next.classList.remove("end");
+            prev.classList.remove("end");
+        }
+
+        if (images[nextIndex]) {
+            images[currentIndex].classList.remove("show");
+            images[nextIndex].classList.add("show");
+            e.target.parentElement.dataset.visibleImage = nextIndex;
+
+        }
+    }
+});
+
+
+
+
+//function getReview() {
 //    // Сохраним свойство имени
 //    this.userName = prompt("Как вас зовут ?")
 //    if(this.userName == null){

@@ -6,10 +6,54 @@
         <title>LifeSpot</title>
         <link href="../Static/CSS/index.css" rel="stylesheet" type="text/css">
         <script type="text/javascript" defer src="../Static/JS/testing.js"></script>
+        <style>
+            .container {
+                width: 1000px;
+                height: 408px;
+                position: relative;
+                margin: 0 10px;
+            }
+
+            .slider {
+                margin: 0 auto;
+                height: 408px;
+                overflow: hidden;
+            }
+
+            .images {
+                position: relative;
+                display: flex;
+                left: 0;
+                transition: all ease 1s;
+            }
+
+            .buttons button {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background: transparent;
+                border: none;
+                color: #fff;
+                font-size: 45px;
+                opacity: 0.8;
+                cursor: pointer;
+                padding: 0;
+                margin: 0 10px;
+            }
+
+            #prev {
+                left: 0px;
+            }
+
+            #next {
+                right: 0px;
+            }
+        </style>
     </head>
     
     <header id="header-index">
         <h1>LifeSpot - тестовая страница</h1>
+        <!--SCROLINGSLIDER-->
         <p>Здесь можно экспериментировать с кодом</p>
         <input type="text" oninput="
          /* Обработчик ввода текста */
